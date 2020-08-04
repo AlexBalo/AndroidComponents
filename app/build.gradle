@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion env.compileSdk
+    buildToolsVersion env.buildTools
+
+    defaultConfig {
+        applicationId apk.packageName
+        minSdkVersion env.minSdk
+        targetSdkVersion env.targetSdk
+        versionCode apk.versionCode
+        versionName apk.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation deps.app.kotlin
+
+    implementation deps.app.androidx.appcompat
+    implementation deps.app.androidx.cardview
+    implementation deps.app.androidx.constraintlayout
+    implementation deps.app.androidx.core
+    implementation deps.app.androidx.lifecyclextentions
+    implementation deps.app.androidx.lifecycleviewmodel
+    implementation deps.app.androidx.recyclerview
+
+
+    testImplementation deps.test.androidx.core
+    testImplementation deps.test.junit
+    testImplementation deps.test.assertjCore
+    testImplementation deps.test.kotlinTest
+    testImplementation deps.test.hamcrest.core
+    testImplementation deps.test.hamcrest.library
+    testImplementation deps.test.hamcrest.integration
+    testImplementation dependencies.create(deps.test.robolectric.core) {
+        // https://github.com/robolectric/robolectric/issues/5245
+        exclude group: 'com.google.auto.service', module: 'auto-service'
+    }
+    testImplementation deps.test.robolectric.multidex
+    testImplementation deps.test.mockito.core
+    testImplementation deps.test.mockito.inline
+    testImplementation dependencies.create(deps.test.mockito.kotlin) {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    androidTestImplementation deps.test.androidx.espresso
+
+}
