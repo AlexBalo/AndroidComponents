@@ -64,6 +64,8 @@ dependencies {
     implementation deps.app.rxjava.rxjavabridge
     implementation deps.app.rxjava.rxkotlin
 
+    implementation deps.app.misc.picasso
+
     testImplementation deps.test.androidx.archcore
     testImplementation deps.test.androidx.core
     testImplementation deps.test.junit

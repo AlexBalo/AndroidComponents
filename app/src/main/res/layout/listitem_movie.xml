@@ -20,7 +20,7 @@
             android:id="@+id/poster"
             android:layout_width="@dimen/poster_width"
             android:layout_height="@dimen/poster_height"
-            android:background="@color/colorAccent"
+            android:scaleType="centerCrop"
             tools:ignore="ContentDescription" />
 
         <TextView

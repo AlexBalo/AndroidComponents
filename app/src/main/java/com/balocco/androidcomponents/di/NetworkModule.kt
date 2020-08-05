@@ -1,7 +1,9 @@
 package com.balocco.androidcomponents.di
 
 import com.balocco.androidcomponents.data.remote.AuthInterceptor
+import com.balocco.androidcomponents.data.remote.ImageLoader
 import com.balocco.androidcomponents.data.remote.RemoteDataSource
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -52,4 +54,14 @@ class NetworkModule {
     @ApplicationScope
     fun provideRemoteDataSource(retrofit: Retrofit):
             RemoteDataSource = retrofit.create(RemoteDataSource::class.java)
+
+    @Provides
+    @ApplicationScope
+    fun providePicasso(): Picasso = Picasso.get()
+
+    @Provides
+    @ApplicationScope
+    fun provideImageLoader(
+        picasso: Picasso
+    ): ImageLoader = ImageLoader(picasso)
 }
