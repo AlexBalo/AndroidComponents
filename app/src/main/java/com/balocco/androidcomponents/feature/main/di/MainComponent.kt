@@ -7,7 +7,11 @@ import dagger.BindsInstance
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent(modules = [])
+@Subcomponent(
+    modules = [
+        MainSubcomponentsModule::class
+    ]
+)
 interface MainComponent {
 
     @Subcomponent.Factory
