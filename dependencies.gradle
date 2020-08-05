@@ -27,6 +27,7 @@ ext {
       constraintlayout    : "2.0.0-beta6",
 
       // Google
+      dagger              : "2.28",
       material            : "1.2.0-beta01",
 
       // RxJava
@@ -38,6 +39,9 @@ ext {
       // Square
       okhttp              : "4.8.0",
       retrofit            : "2.9.0",
+
+      // Misc
+      javaxAnnotations    : "10.0-b28",
 
       // Tests
       androidTestCore     : "1.2.0",
@@ -70,10 +74,15 @@ ext {
           ],
           kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
           google      : [
+              dagger    : [
+                  core    : "com.google.dagger:dagger:${versions.dagger}",
+                  compiler: "com.google.dagger:dagger-compiler:${versions.dagger}",
+              ],
               gson      : "com.google.code.gson:gson:2.8.5",
               material  : "com.google.android.material:material:${versions.material}",
           ],
-          okhttp      : [
+          misc        : [
+              javaxAnnotations : "org.glassfish:javax.annotation:${versions.javaxAnnotations}",
           ],
           rxjava      : [
               rxjava      : "io.reactivex.rxjava3:rxjava:${versions.rxJava}",
