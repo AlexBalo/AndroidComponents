@@ -11,7 +11,6 @@ import com.balocco.androidcomponents.feature.main.domain.FetchTopRatedMoviesUseC
 import io.reactivex.rxjava3.kotlin.addTo
 import javax.inject.Inject
 
-
 class MainViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase
