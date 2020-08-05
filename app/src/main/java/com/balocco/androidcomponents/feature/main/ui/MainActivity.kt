@@ -1,6 +1,7 @@
 package com.balocco.androidcomponents.feature.main.ui
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,12 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        val toolbar: Toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = getString(R.string.title_main)
+
         manager = LinearLayoutManager(this)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler)
         recyclerView.apply {

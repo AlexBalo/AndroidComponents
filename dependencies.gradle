@@ -42,6 +42,7 @@ ext {
 
       // Misc
       javaxAnnotations    : "10.0-b28",
+      picasso             : "2.71828",
 
       // Tests
       archCore            : "2.0.1",
@@ -84,6 +85,7 @@ ext {
           ],
           misc        : [
               javaxAnnotations : "org.glassfish:javax.annotation:${versions.javaxAnnotations}",
+              picasso          : "com.squareup.picasso:picasso:${versions.picasso}",
           ],
           rxjava      : [
               rxjava      : "io.reactivex.rxjava3:rxjava:${versions.rxJava}",
