@@ -1,0 +1,40 @@
+package com.balocco.androidcomponents.feature.main.ui
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.balocco.androidcomponents.R
+import com.balocco.androidcomponents.data.model.Movie
+import java.util.*
+import javax.inject.Inject
+
+class MoviesAdapter @Inject constructor(
+    context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var movies: MutableList<Movie> = ArrayList()
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+
+    fun update(newValues: List<Movie>) {
+        movies.clear()
+        movies.addAll(newValues)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemId(position: Int) = position.toLong()
+
+    override fun getItemViewType(position: Int) = 0
+
+    override fun getItemCount() = movies.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val view = layoutInflater.inflate(R.layout.listitem_movie, parent, false)
+        return MoviesViewHolder(view)
+    }
+
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        val itemViewHolder = viewHolder as MoviesViewHolder
+        itemViewHolder.onBindViewHolder(movies[position])
+    }
+}

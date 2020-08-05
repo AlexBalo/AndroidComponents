@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="@dimen/one_unit_dp"
+    android:layout_marginTop="@dimen/half_unit_dp"
+    android:layout_marginEnd="@dimen/one_unit_dp"
+    android:layout_marginBottom="@dimen/half_unit_dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:padding="@dimen/one_unit_dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="@dimen/poster_width"
+            android:layout_height="@dimen/poster_height"
+            android:background="@color/colorAccent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/one_unit_dp"
+            android:layout_toEndOf="@+id/poster"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/two_and_half_unit_sp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginStart="@dimen/one_unit_dp"
+            android:layout_toEndOf="@+id/poster"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/one_and_half_unit_sp"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/voteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/one_unit_dp"
+            android:paddingBottom="@dimen/one_unit_dp"
+            android:src="@drawable/ic_baseline_star_24"
+            android:tint="@color/textPrimary"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/voteIcon"
+            android:layout_toEndOf="@+id/poster"
+            android:gravity="end"
+            android:paddingBottom="@dimen/one_unit_dp"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/two_and_quarter_unit_sp"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
