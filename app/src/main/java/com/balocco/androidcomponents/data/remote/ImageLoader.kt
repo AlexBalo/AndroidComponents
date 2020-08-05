@@ -4,8 +4,6 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-private const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
-
 class ImageLoader @Inject constructor(
     private val picasso: Picasso
 ) {
@@ -15,5 +13,6 @@ class ImageLoader @Inject constructor(
         picasso.load(imageUrl).into(target)
     }
 
-    private fun buildImageUrl(imageName: String) = "$BASE_IMAGE_URL${imageName}"
+    private fun buildImageUrl(imageName: String) =
+        "${RemoteDataSource.BASE_IMAGE_URL}${imageName}"
 }
