@@ -29,6 +29,16 @@ ext {
       // Google
       material            : "1.2.0-beta01",
 
+      // RxJava
+      rxjava              : "3.0.4",
+      rxjavaBridge        : "3.0.0",
+      rxAndroid           : "3.0.0",
+      rxKotlin            : "3.0.0",
+
+      // Square
+      okhttp              : "4.8.0",
+      retrofit            : "2.9.0",
+
       // Tests
       androidTestCore     : "1.2.0",
       androidTestUnit     : "1.1.1",
@@ -60,8 +70,23 @@ ext {
           ],
           kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
           google      : [
+              gson      : "com.google.code.gson:gson:2.8.5",
               material  : "com.google.android.material:material:${versions.material}",
           ],
+          okhttp      : [
+          ],
+          rxjava      : [
+              rxjava      : "io.reactivex.rxjava3:rxjava:${versions.rxJava}",
+              rxjavabridge: "com.github.akarnokd:rxjava3-bridge:${versions.rxjavaBridge}",
+              rxandroid   : "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}",
+              rxkotlin    : "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}",
+          ],
+          squareup    : [
+              gsonconverter     : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+              logginginterceptor: "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+              retrofit          : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+              rxadapter         : "com.squareup.retrofit2:adapter-rxjava3:${versions.retrofit}"
+          ]
       ],
       test: [
           androidx   : [
