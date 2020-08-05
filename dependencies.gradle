@@ -44,6 +44,7 @@ ext {
       javaxAnnotations    : "10.0-b28",
 
       // Tests
+      archCore            : "2.0.1",
       androidTestCore     : "1.2.0",
       androidTestUnit     : "1.1.1",
       assertj             : "3.16.1",
@@ -99,6 +100,7 @@ ext {
       ],
       test: [
           androidx   : [
+              archcore    : "androidx.arch.core:core-testing:${versions.archCore}",
               core        : "androidx.test:core:${versions.androidTestCore}",
               espresso    : "androidx.test.espresso:espresso-core:${versions.espresso}",
               rules       : "androidx.test:rules:${versions.androidTestUnit}",
