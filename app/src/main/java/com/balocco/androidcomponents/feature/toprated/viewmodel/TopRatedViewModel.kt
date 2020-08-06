@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.balocco.androidcomponents.R
 import com.balocco.androidcomponents.common.scheduler.SchedulerProvider
-import com.balocco.androidcomponents.common.viewmodel.RxViewModel
+import com.balocco.androidcomponents.common.viewmodel.BaseViewModel
 import com.balocco.androidcomponents.common.viewmodel.State
 import com.balocco.androidcomponents.data.model.Movie
 import com.balocco.androidcomponents.data.model.MoviesPage
@@ -17,7 +17,7 @@ class TopRatedViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
     private val fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase,
     private val loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase
-) : RxViewModel() {
+) : BaseViewModel() {
 
     private var topRatedState: MutableLiveData<TopRatedState> = MutableLiveData()
     private var movies = mutableListOf<Movie>()
@@ -33,6 +33,10 @@ class TopRatedViewModel @Inject constructor(
                 { handleError() }
             ).addTo(compositeDisposable)
         fetchTopRatedMovies()
+    }
+
+    fun onMovieSelected(movie: Movie) {
+        navigator?.goToDetail(movie.id)
     }
 
     private fun fetchTopRatedMovies() {

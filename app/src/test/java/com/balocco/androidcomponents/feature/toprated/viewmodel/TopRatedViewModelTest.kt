@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.balocco.androidcomponents.R
 import com.balocco.androidcomponents.TestUtils
+import com.balocco.androidcomponents.common.navigation.Navigator
 import com.balocco.androidcomponents.common.scheduler.TestSchedulerProvider
 import com.balocco.androidcomponents.common.viewmodel.State
 import com.balocco.androidcomponents.data.model.Movie
@@ -34,6 +35,9 @@ class TopRatedViewModelTest {
 
     @Captor
     private lateinit var moviesCaptor: ArgumentCaptor<TopRatedState>
+
+    @Mock
+    private lateinit var navigator: Navigator
 
     @Mock
     private lateinit var observer: Observer<TopRatedState>
@@ -104,6 +108,16 @@ class TopRatedViewModelTest {
         assertEquals(State.ERROR, loadingState.state)
         assertTrue(loadingState.results.isEmpty())
         assertEquals(R.string.error_loading_movies, loadingState.errorMessage)
+    }
+
+    @Test
+    fun `When movie selected, navigates to detail view`() {
+        val movie = TestUtils.createMovie("12")
+        viewModel.setNavigator(navigator)
+
+        viewModel.onMovieSelected(movie)
+
+        verify(navigator).goToDetail(movie.id)
     }
 
     private fun createMoviePage(movies: List<Movie>): MoviesPage =

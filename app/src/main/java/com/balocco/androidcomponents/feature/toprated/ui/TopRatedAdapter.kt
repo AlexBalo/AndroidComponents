@@ -15,8 +15,13 @@ class TopRatedAdapter @Inject constructor(
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var movieSelectedListener: OnMovieSelectedListener? = null
     private var movies: MutableList<Movie> = ArrayList()
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+
+    fun setMovieListener(listener: OnMovieSelectedListener?) {
+        movieSelectedListener = listener
+    }
 
     fun update(newValues: List<Movie>) {
         movies.clear()
@@ -41,5 +46,12 @@ class TopRatedAdapter @Inject constructor(
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val itemViewHolder = viewHolder as TopRatedViewHolder
         itemViewHolder.onBindViewHolder(movies[position])
+        viewHolder.itemView.setOnClickListener {
+            movieSelectedListener?.onMovieSelected(movies[position])
+        }
+    }
+
+    interface OnMovieSelectedListener {
+        fun onMovieSelected(movie: Movie)
     }
 }
