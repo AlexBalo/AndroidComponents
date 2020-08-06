@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balocco.androidcomponents.R
+import com.balocco.androidcomponents.common.navigation.Navigator
 import com.balocco.androidcomponents.common.ui.BaseActivity
 import com.balocco.androidcomponents.common.viewmodel.State
 import com.balocco.androidcomponents.common.viewmodel.ViewModelFactory
+import com.balocco.androidcomponents.data.model.Movie
 import com.balocco.androidcomponents.di.AppComponent
 import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedState
 import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedViewModel
@@ -26,6 +28,9 @@ class TopRatedActivity : BaseActivity() {
     lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
     lateinit var topRatedAdapter: TopRatedAdapter
 
     private lateinit var loading: ProgressBar
@@ -35,7 +40,7 @@ class TopRatedActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.toprated_activity)
 
         root = findViewById(R.id.container)
         loading = findViewById(R.id.loading_spinner)
@@ -52,10 +57,23 @@ class TopRatedActivity : BaseActivity() {
             adapter = topRatedAdapter
         }
 
+        topRatedAdapter.setMovieListener(object : TopRatedAdapter.OnMovieSelectedListener {
+            override fun onMovieSelected(movie: Movie) {
+                viewModel.onMovieSelected(movie)
+            }
+        })
+
         viewModel =
             ViewModelProvider(viewModelStore, viewModelFactory).get(TopRatedViewModel::class.java)
         viewModel.topRatedState().observe(this, Observer { state -> handleState(state) })
         viewModel.start()
+        viewModel.setNavigator(navigator)
+    }
+
+    override fun onDestroy() {
+        viewModel.setNavigator(null)
+        topRatedAdapter.setMovieListener(null)
+        super.onDestroy()
     }
 
     private fun handleState(topRatedState: TopRatedState) {
@@ -77,6 +95,6 @@ class TopRatedActivity : BaseActivity() {
     }
 
     override fun onInject(appComponent: AppComponent) {
-        appComponent.mainComponent().create(this).inject(this)
+        appComponent.topRatedComponent().create(this).inject(this)
     }
 }

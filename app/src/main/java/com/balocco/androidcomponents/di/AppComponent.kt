@@ -2,6 +2,7 @@ package com.balocco.androidcomponents.di
 
 import android.content.Context
 import com.balocco.androidcomponents.AndroidComponentsApplication
+import com.balocco.androidcomponents.feature.detail.di.DetailComponent
 import com.balocco.androidcomponents.feature.toprated.di.TopRatedComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -23,7 +24,8 @@ interface AppComponent {
     }
 
     // Activities
-    fun mainComponent(): TopRatedComponent.Factory
+    fun topRatedComponent(): TopRatedComponent.Factory
+    fun detailComponent(): DetailComponent.Factory
 
     fun inject(application: AndroidComponentsApplication)
 
