@@ -33,7 +33,6 @@ class TopRatedViewModel @Inject constructor(
                 { handleError() }
             ).addTo(compositeDisposable)
         fetchTopRatedMovies()
-
     }
 
     private fun fetchTopRatedMovies() {
