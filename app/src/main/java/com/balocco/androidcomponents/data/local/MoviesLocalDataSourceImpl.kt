@@ -12,7 +12,7 @@ class MoviesLocalDataSourceImpl(
     override fun insertMovies(movies: List<Movie>): Completable =
         RxJavaBridge.toV3Completable(dao.insertMovies(movies))
 
-    override fun getAllMovies(): Single<List<Movie>> =
+    override fun fetchAllMovies(): Single<List<Movie>> =
         RxJavaBridge.toV3Single(dao.queryAllMovies())
 
 }

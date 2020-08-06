@@ -8,6 +8,6 @@ interface LocalDataSource {
 
     fun insertMovies(movies: List<Movie>): Completable
 
-    fun getAllMovies(): Single<List<Movie>>
+    fun fetchAllMovies(): Single<List<Movie>>
 
 }
