@@ -1,4 +1,4 @@
-package com.balocco.androidcomponents.feature.main.ui
+package com.balocco.androidcomponents.feature.toprated.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.balocco.androidcomponents.data.remote.ImageLoader
 import java.util.*
 import javax.inject.Inject
 
-class MoviesAdapter @Inject constructor(
+class TopRatedAdapter @Inject constructor(
     context: Context,
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,11 +32,14 @@ class MoviesAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = layoutInflater.inflate(R.layout.listitem_movie, parent, false)
-        return MoviesViewHolder(view, imageLoader)
+        return TopRatedViewHolder(
+            view,
+            imageLoader
+        )
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        val itemViewHolder = viewHolder as MoviesViewHolder
+        val itemViewHolder = viewHolder as TopRatedViewHolder
         itemViewHolder.onBindViewHolder(movies[position])
     }
 }

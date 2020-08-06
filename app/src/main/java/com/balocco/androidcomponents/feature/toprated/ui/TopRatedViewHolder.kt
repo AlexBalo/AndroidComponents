@@ -1,4 +1,4 @@
-package com.balocco.androidcomponents.feature.main.ui
+package com.balocco.androidcomponents.feature.toprated.ui
 
 import android.view.View
 import android.widget.ImageView
@@ -8,7 +8,7 @@ import com.balocco.androidcomponents.R
 import com.balocco.androidcomponents.data.model.Movie
 import com.balocco.androidcomponents.data.remote.ImageLoader
 
-class MoviesViewHolder(
+class TopRatedViewHolder(
     itemView: View,
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(itemView) {

@@ -1,10 +1,10 @@
 package com.balocco.androidcomponents.di
 
-import com.balocco.androidcomponents.feature.main.di.MainComponent
+import com.balocco.androidcomponents.feature.toprated.di.TopRatedComponent
 import dagger.Module
 
 @Module(
     subcomponents = [
-        MainComponent::class]
+        TopRatedComponent::class]
 )
 class AppSubcomponentsModule
