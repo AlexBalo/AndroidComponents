@@ -8,7 +8,7 @@ import dagger.Subcomponent
 
 @ActivityScope
 @Subcomponent(
-    modules = []
+    modules = [DetailSubcomponentsModule::class]
 )
 interface DetailComponent {
 

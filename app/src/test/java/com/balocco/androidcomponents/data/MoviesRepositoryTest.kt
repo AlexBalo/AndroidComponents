@@ -31,6 +31,14 @@ class MoviesRepositoryTest {
     }
 
     @Test
+    fun `When loading movie, loads movie from local data source`() {
+        val movie = TestUtils.createMovie("1")
+        whenever(localDataSource.fetchMovie("1")).thenReturn(Single.just(movie))
+
+        repository.loadMovie("1").test().assertResult(movie)
+    }
+
+    @Test
     fun `When loading top rated movies, loads movies from local data source`() {
         val movies = mutableListOf(TestUtils.createMovie("1"), TestUtils.createMovie("2"))
         whenever(localDataSource.fetchAllMoviesSortedByRating()).thenReturn(Flowable.just(movies))

@@ -3,5 +3,12 @@
     <string name="title_main">Top Rated Movies</string>
     <string name="release">Release date: %s</string>
     <string name="vote">%s/10</string>
+    <string name="vote_count">%s votes</string>
     <string name="error_loading_movies">Something went wrong while loading movies</string>
+    <string name="detail_overview">Overview</string>
+    <string name="detail_genres">Genres</string>
+    <string name="detail_genres_default">-</string>
+    <string name="detail_release_date">Release date</string>
+    <string name="detail_original_language">Original language</string>
+    <string name="error_loading_movie">We are experiencing problem with this movie</string>
 </resources>

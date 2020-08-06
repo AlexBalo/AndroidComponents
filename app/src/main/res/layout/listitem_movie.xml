@@ -45,7 +45,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/voteIcon"
+            android:id="@+id/vote_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/voteIcon"
+            android:layout_toStartOf="@+id/vote_icon"
             android:layout_toEndOf="@+id/poster"
             android:gravity="end"
             android:paddingBottom="@dimen/one_unit_dp"

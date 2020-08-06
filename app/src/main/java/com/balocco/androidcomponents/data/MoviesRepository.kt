@@ -14,6 +14,8 @@ class MoviesRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) {
 
+    fun loadMovie(id: String): Single<Movie> = localDataSource.fetchMovie(id)
+
     fun loadTopRatedMovies(): Flowable<List<Movie>> = localDataSource.fetchAllMoviesSortedByRating()
 
     fun storeTopRatedMovies(movies: List<Movie>): Completable = localDataSource.insertMovies(movies)
