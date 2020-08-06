@@ -27,7 +27,7 @@ class DetailActivity : BaseActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         collapsingToolbar.setContentScrimColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        collapsingToolbar.title = "This is a very long title but maybe it will be smaller"
+        collapsingToolbar.title = ""
     }
 
     override fun onInject(appComponent: AppComponent) {
