@@ -40,6 +40,17 @@ class MoviesDaoTest {
     }
 
     @Test
+    fun fetchMovieWithId_returnsMovieWithIdInDatabase() {
+        val genresOne = mutableListOf(1, 3)
+        val movieOne = givenMovie(id = "1", title = "Simple title", genres = genresOne)
+        val genresTwo = mutableListOf(4, 6)
+        val movieTwo = givenMovie(id = "2", title = "Another title", genres = genresTwo)
+        dao.insertMovies(listOf(movieOne, movieTwo)).test()
+
+        dao.queryMovieWithId("1").test().assertValues(movieOne)
+    }
+
+    @Test
     fun fetchAllMovies_returnsAllMoviesInDatabase() {
         val genresOne = mutableListOf(1, 3)
         val movieOne = givenMovie(id = "1", title = "Simple title", genres = genresOne)

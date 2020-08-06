@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.balocco.androidcomponents.data.model.Movie
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface MoviesDao {
@@ -19,6 +20,9 @@ interface MoviesDao {
 
     @Query("SELECT * FROM ${Movie.TABLE_NAME} ORDER BY ${Movie.COLUMN_VOTE_AVERAGE} DESC")
     fun queryAllMoviesSortedByRating(): Flowable<List<Movie>>
+
+    @Query("SELECT * FROM ${Movie.TABLE_NAME} WHERE ${Movie.COLUMN_ID} = :id")
+    fun queryMovieWithId(id: String): Single<Movie>
 
     companion object {
         const val DATABASE_NAME = "moviesDatabase"

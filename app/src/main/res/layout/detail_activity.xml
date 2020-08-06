@@ -41,6 +41,14 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="0dp"
                     android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:src="@drawable/background_gradient"
                     app:layout_constraintDimensionRatio="H,16:9"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +103,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/vote_icon"
-                    android:text="8.0/10"
                     android:textColor="@color/textPrimary"
                     android:textSize="@dimen/two_and_quarter_unit_sp"
                     tools:ignore="ContentDescription" />
@@ -105,9 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/vote"
-                    android:layout_marginStart="@dimen/one_unit_dp"
                     android:layout_toEndOf="@+id/vote_icon"
-                    android:text="8.0/10"
                     android:textColor="@color/textPrimary"
                     android:textSize="@dimen/one_and_half_unit_sp" />
             </RelativeLayout>
@@ -123,13 +128,13 @@
                 style="@style/DetailTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plot" />
+                android:text="@string/detail_overview" />
 
             <TextView
+                android:id="@+id/overview"
                 style="@style/DetailDescriptionTextStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the plot" />
+                android:layout_height="wrap_content" />
 
             <View
                 android:layout_width="match_parent"
@@ -142,13 +147,13 @@
                 style="@style/DetailTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Genres" />
+                android:text="@string/detail_genres" />
 
             <TextView
                 style="@style/DetailDescriptionTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This are the genres" />
+                android:text="@string/detail_genres_default" />
 
             <View
                 android:layout_width="match_parent"
@@ -161,13 +166,13 @@
                 style="@style/DetailTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Release data" />
+                android:text="@string/detail_release_date" />
 
             <TextView
+                android:id="@+id/release_date"
                 style="@style/DetailDescriptionTextStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Release date" />
+                android:layout_height="wrap_content" />
 
             <View
                 android:layout_width="match_parent"
@@ -180,13 +185,13 @@
                 style="@style/DetailTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Original language" />
+                android:text="@string/detail_original_language" />
 
             <TextView
+                android:id="@+id/original_language"
                 style="@style/DetailDescriptionTextStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the original language" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
