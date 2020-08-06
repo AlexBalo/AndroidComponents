@@ -1,5 +1,6 @@
 package com.balocco.androidcomponents.data
 
+import com.balocco.androidcomponents.data.local.LocalDataSource
 import com.balocco.androidcomponents.data.model.MoviesPage
 import com.balocco.androidcomponents.data.remote.RemoteDataSource
 import com.nhaarman.mockito_kotlin.whenever
@@ -12,6 +13,9 @@ import org.mockito.MockitoAnnotations
 class MoviesRepositoryTest {
 
     @Mock
+    lateinit var localDataSource: LocalDataSource
+
+    @Mock
     lateinit var remoteDataSource: RemoteDataSource
 
     private lateinit var repository: MoviesRepository
@@ -20,7 +24,7 @@ class MoviesRepositoryTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        repository = MoviesRepository(remoteDataSource)
+        repository = MoviesRepository(localDataSource, remoteDataSource)
     }
 
     @Test

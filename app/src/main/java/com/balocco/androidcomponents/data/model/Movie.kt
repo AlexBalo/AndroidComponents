@@ -1,17 +1,48 @@
 package com.balocco.androidcomponents.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = Movie.TABLE_NAME)
 data class Movie(
-    @SerializedName("id") val id: String,
-    @SerializedName("title") val title: String,
-    @SerializedName("overview") val overview: String,
-    @SerializedName("original_language") val originalLanguage: String,
-    @SerializedName("vote_average") val voteAverage: Double,
-    @SerializedName("release_date") val releaseDate: String,
-    @SerializedName("backdrop_path") val backdropImageName: String,
-    @SerializedName("poster_path") val posterImageName: String,
-    @SerializedName("genre_ids") val genres: List<Int>,
-    @SerializedName("vote_count") val voteCount: Int,
-    @SerializedName("popularity") val popularity: Double
-)
+    @PrimaryKey @ColumnInfo(name = COLUMN_ID)
+    @SerializedName("id")
+    val id: String,
+    @ColumnInfo(name = "title")
+    @SerializedName("title")
+    val title: String,
+    @ColumnInfo(name = "overview")
+    @SerializedName("overview")
+    val overview: String,
+    @ColumnInfo(name = "original_language")
+    @SerializedName("original_language")
+    val originalLanguage: String,
+    @ColumnInfo(name = "vote_average")
+    @SerializedName("vote_average")
+    val voteAverage: Double,
+    @ColumnInfo(name = "release_date")
+    @SerializedName("release_date")
+    val releaseDate: String,
+    @ColumnInfo(name = "backdrop_path")
+    @SerializedName("backdrop_path")
+    val backdropImageName: String,
+    @ColumnInfo(name = "poster_path")
+    @SerializedName("poster_path")
+    val posterImageName: String,
+    @ColumnInfo(name = "genre_ids")
+    @SerializedName("genre_ids")
+    val genres: List<Int>,
+    @ColumnInfo(name = "vote_count")
+    @SerializedName("vote_count")
+    val voteCount: Int,
+    @ColumnInfo(name = "popularity")
+    @SerializedName("popularity")
+    val popularity: Double
+) {
+    companion object {
+        const val TABLE_NAME = "birthdays"
+        const val COLUMN_ID = "uid"
+    }
+}

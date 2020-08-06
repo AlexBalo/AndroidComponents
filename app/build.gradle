@@ -46,6 +46,9 @@ dependencies {
     implementation deps.app.androidx.lifecyclextentions
     implementation deps.app.androidx.lifecycleviewmodel
     implementation deps.app.androidx.recyclerview
+    implementation deps.app.androidx.roomRuntime
+    implementation deps.app.androidx.roomRxJava
+    kapt deps.app.androidx.roomCompiler
 
     implementation deps.app.google.gson
     implementation deps.app.google.material
@@ -86,5 +89,7 @@ dependencies {
     }
 
     androidTestImplementation deps.test.androidx.espresso
+    androidTestImplementation deps.test.androidx.roomTesting
+    androidTestImplementation deps.test.androidx.androidJUnit
 
 }
