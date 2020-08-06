@@ -1,4 +1,4 @@
-package com.balocco.androidcomponents.feature.main.domain
+package com.balocco.androidcomponents.feature.toprated.domain
 
 import com.balocco.androidcomponents.data.MoviesRepository
 import com.balocco.androidcomponents.data.model.MoviesPage
@@ -20,7 +20,10 @@ class FetchTopRatedMoviesUseCaseTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        useCase = FetchTopRatedMoviesUseCase(moviesRepository)
+        useCase =
+            FetchTopRatedMoviesUseCase(
+                moviesRepository
+            )
     }
 
     @Test

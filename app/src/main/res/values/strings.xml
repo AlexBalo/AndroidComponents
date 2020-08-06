@@ -3,4 +3,5 @@
     <string name="title_main">Top Rated Movies</string>
     <string name="release">Release date: %s</string>
     <string name="vote">%s/10</string>
+    <string name="error_loading_movies">Something went wrong while loading movies</string>
 </resources>

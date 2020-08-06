@@ -5,17 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".feature.main.ui.MainActivity">
+    tools:context=".feature.toprated.ui.TopRatedActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/view_toolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/half_unit_dp"
-        android:paddingBottom="@dimen/half_unit_dp" />
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/loading_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_atop" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/half_unit_dp"
+            android:paddingBottom="@dimen/half_unit_dp" />
+
+    </FrameLayout>
 </LinearLayout>

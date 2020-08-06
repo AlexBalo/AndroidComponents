@@ -1,25 +1,25 @@
-package com.balocco.androidcomponents.feature.main.di
+package com.balocco.androidcomponents.feature.toprated.di
 
 import android.app.Activity
 import com.balocco.androidcomponents.di.ActivityScope
-import com.balocco.androidcomponents.feature.main.ui.MainActivity
+import com.balocco.androidcomponents.feature.toprated.ui.TopRatedActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 
 @ActivityScope
 @Subcomponent(
     modules = [
-        MainSubcomponentsModule::class
+        TopRatedSubcomponentsModule::class
     ]
 )
-interface MainComponent {
+interface TopRatedComponent {
 
     @Subcomponent.Factory
     interface Factory {
         fun create(
             @BindsInstance activity: Activity
-        ): MainComponent
+        ): TopRatedComponent
     }
 
-    fun inject(activity: MainActivity)
+    fun inject(activity: TopRatedActivity)
 }
