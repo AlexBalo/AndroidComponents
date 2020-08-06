@@ -2,22 +2,26 @@ package com.balocco.androidcomponents.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.balocco.androidcomponents.data.model.Movie
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 @Dao
 interface MoviesDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movies: List<Movie>): Completable
 
     @Query("SELECT * FROM ${Movie.TABLE_NAME}")
-    fun queryAllMovies(): Single<List<Movie>>
+    fun queryAllMovies(): Flowable<List<Movie>>
+
+    @Query("SELECT * FROM ${Movie.TABLE_NAME} ORDER BY ${Movie.COLUMN_VOTE_AVERAGE} DESC")
+    fun queryAllMoviesSortedByRating(): Flowable<List<Movie>>
 
     companion object {
-        val DATABASE_NAME = "moviesDatabase"
+        const val DATABASE_NAME = "moviesDatabase"
     }
 
 }

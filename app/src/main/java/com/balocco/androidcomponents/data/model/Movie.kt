@@ -19,7 +19,7 @@ data class Movie(
     @ColumnInfo(name = "original_language")
     @SerializedName("original_language")
     val originalLanguage: String,
-    @ColumnInfo(name = "vote_average")
+    @ColumnInfo(name = COLUMN_VOTE_AVERAGE)
     @SerializedName("vote_average")
     val voteAverage: Double,
     @ColumnInfo(name = "release_date")
@@ -44,5 +44,6 @@ data class Movie(
     companion object {
         const val TABLE_NAME = "birthdays"
         const val COLUMN_ID = "uid"
+        const val COLUMN_VOTE_AVERAGE = "vote_average"
     }
 }

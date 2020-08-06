@@ -9,5 +9,10 @@ class FetchTopRatedMoviesUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 
-    operator fun invoke(page: Int = 1): Single<MoviesPage> = repository.fetchTopRatedMovies(page)
+    operator fun invoke(page: Int = 1): Single<MoviesPage> {
+        return repository.fetchTopRatedMovies(page)
+            .flatMap { result ->
+                repository.storeTopRatedMovies(result.results).andThen(Single.just(result))
+            }
+    }
 }
