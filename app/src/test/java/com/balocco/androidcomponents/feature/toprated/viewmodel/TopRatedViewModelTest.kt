@@ -87,7 +87,7 @@ class TopRatedViewModelTest {
 
         viewModel.start()
 
-        // We get invokation for the success state as well so we check only first result
+        // We get invokation for the loading state as well so we check second error result
         verify(observer, times(2)).onChanged(moviesCaptor.capture())
         val loadingState = moviesCaptor.allValues[1]
         assertEquals(State.ERROR, loadingState.state)
