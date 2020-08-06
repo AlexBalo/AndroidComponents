@@ -88,8 +88,10 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
 
+    androidTestImplementation deps.test.androidx.archcore
     androidTestImplementation deps.test.androidx.espresso
     androidTestImplementation deps.test.androidx.roomTesting
+    androidTestImplementation deps.test.androidx.rules
     androidTestImplementation deps.test.androidx.androidJUnit
 
 }
