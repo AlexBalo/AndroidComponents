@@ -28,25 +28,15 @@ import org.mockito.MockitoAnnotations
 
 class TopRatedViewModelTest {
 
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+    @get:Rule val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: TopRatedViewModel
 
-    @Captor
-    private lateinit var moviesCaptor: ArgumentCaptor<TopRatedState>
-
-    @Mock
-    private lateinit var navigator: Navigator
-
-    @Mock
-    private lateinit var observer: Observer<TopRatedState>
-
-    @Mock
-    private lateinit var fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase
-
-    @Mock
-    private lateinit var loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase
+    @Captor private lateinit var moviesCaptor: ArgumentCaptor<TopRatedState>
+    @Mock private lateinit var navigator: Navigator
+    @Mock private lateinit var observer: Observer<TopRatedState>
+    @Mock private lateinit var fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase
+    @Mock private lateinit var loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase
 
     @Before
     fun setUp() {

@@ -1,5 +1,6 @@
 package com.balocco.androidcomponents.data.local
 
+import com.balocco.androidcomponents.data.model.Genre
 import com.balocco.androidcomponents.data.model.Movie
 import hu.akarnokd.rxjava3.bridge.RxJavaBridge
 import io.reactivex.rxjava3.core.Completable
@@ -21,5 +22,11 @@ class MoviesLocalDataSourceImpl(
 
     override fun fetchMovie(id: String): Single<Movie> =
         RxJavaBridge.toV3Single(dao.queryMovieWithId(id))
+
+    override fun insertGenres(genres: List<Genre>): Completable =
+        RxJavaBridge.toV3Completable(dao.insertGenres(genres))
+
+    override fun fetchGenres(ids: List<Int>): Flowable<List<Genre>> =
+        RxJavaBridge.toV3Flowable(dao.queryGenres(ids))
 
 }

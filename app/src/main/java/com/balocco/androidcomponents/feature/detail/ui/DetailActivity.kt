@@ -27,17 +27,15 @@ private const val KEY_MOVIE_ID = "KEY_MOVIE_ID"
 
 class DetailActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
-    lateinit var imageLoader: ImageLoader
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    @Inject lateinit var imageLoader: ImageLoader
 
     private lateinit var backdropImage: ImageView
     private lateinit var voteAverageText: TextView
     private lateinit var voteCountText: TextView
     private lateinit var collapsingToolbar: CollapsingToolbarLayout
     private lateinit var overviewText: TextView
+    private lateinit var genresText: TextView
     private lateinit var releaseDateText: TextView
     private lateinit var originalLanguageText: TextView
     private lateinit var viewModel: DetailViewModel
@@ -51,6 +49,7 @@ class DetailActivity : BaseActivity() {
         voteAverageText = findViewById(R.id.vote)
         voteCountText = findViewById(R.id.vote_count)
         overviewText = findViewById(R.id.overview)
+        genresText = findViewById(R.id.genres)
         releaseDateText = findViewById(R.id.release_date)
         originalLanguageText = findViewById(R.id.original_language)
 
@@ -86,7 +85,7 @@ class DetailActivity : BaseActivity() {
         when (state.state) {
             State.LOADING -> {
             }
-            State.SUCCESS -> populateView(state.movie)
+            State.SUCCESS -> populateView(state.movie, state.genres)
             State.ERROR -> {
                 Toast.makeText(this, state.errorMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
@@ -94,7 +93,7 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private fun populateView(movie: Movie?) {
+    private fun populateView(movie: Movie?, genres: String) {
         movie?.let {
             imageLoader.loadImage(backdropImage, movie.backdropImageName)
             collapsingToolbar.title = movie.title
@@ -103,6 +102,10 @@ class DetailActivity : BaseActivity() {
             overviewText.text = movie.overview
             releaseDateText.text = movie.releaseDate
             originalLanguageText.text = movie.originalLanguage.toUpperCase(Locale.ENGLISH)
+        }
+
+        if (genres.isNotEmpty()) {
+            genresText.text = genres
         }
     }
 

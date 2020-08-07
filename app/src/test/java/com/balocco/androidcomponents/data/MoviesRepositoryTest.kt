@@ -2,6 +2,8 @@ package com.balocco.androidcomponents.data
 
 import com.balocco.androidcomponents.TestUtils
 import com.balocco.androidcomponents.data.local.LocalDataSource
+import com.balocco.androidcomponents.data.model.Genre
+import com.balocco.androidcomponents.data.model.Genres
 import com.balocco.androidcomponents.data.model.MoviesPage
 import com.balocco.androidcomponents.data.remote.RemoteDataSource
 import com.nhaarman.mockito_kotlin.whenever
@@ -15,11 +17,8 @@ import org.mockito.MockitoAnnotations
 
 class MoviesRepositoryTest {
 
-    @Mock
-    lateinit var localDataSource: LocalDataSource
-
-    @Mock
-    lateinit var remoteDataSource: RemoteDataSource
+    @Mock lateinit var localDataSource: LocalDataSource
+    @Mock lateinit var remoteDataSource: RemoteDataSource
 
     private lateinit var repository: MoviesRepository
 
@@ -78,5 +77,30 @@ class MoviesRepositoryTest {
         whenever(remoteDataSource.fetchTopRatedMovies(3)).thenReturn(Single.just(moviesPage))
 
         repository.fetchTopRatedMovies(3).test().assertResult(moviesPage)
+    }
+
+    @Test
+    fun `When loading genres, loads genres from local data source`() {
+        val genre = Genre(1, "Action")
+        whenever(localDataSource.fetchGenres(listOf(1))).thenReturn(Flowable.just(listOf(genre)))
+
+        repository.loadGenres(listOf(1)).test().assertResult(listOf(genre))
+    }
+
+    @Test
+    fun `When storing genres, store genres in local data source`() {
+        val genre = Genre(1, "Action")
+        whenever(localDataSource.insertGenres(listOf(genre))).thenReturn(Completable.complete())
+
+        repository.storeGenres(listOf(genre)).test().assertComplete()
+    }
+
+    @Test
+    fun `When fetching genres, fetches genres from remote data source`() {
+        val genre = Genre(1, "Action")
+        val genres = Genres(listOf(genre))
+        whenever(remoteDataSource.fetchGenres()).thenReturn(Single.just(genres))
+
+        repository.fetchGenres().test().assertValue(genres)
     }
 }

@@ -4,7 +4,10 @@ import com.balocco.androidcomponents.data.model.Movie
 
 object TestUtils {
 
-    fun createMovie(id: String): Movie =
+    fun createMovie(
+        id: String,
+        genres: List<Int> = listOf()
+    ): Movie =
         Movie(
             id = id,
             title = "Title",
@@ -14,7 +17,7 @@ object TestUtils {
             releaseDate = "11-10-2020",
             backdropImageName = "backdrop.jpg",
             posterImageName = "poster.jpg",
-            genres = mutableListOf(),
+            genres = genres,
             voteCount = 100,
             popularity = 123.0
         )

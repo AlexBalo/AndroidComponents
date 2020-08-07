@@ -15,8 +15,7 @@ import org.mockito.MockitoAnnotations
 
 class FetchTopRatedMoviesUseCaseTest {
 
-    @Mock
-    lateinit var moviesRepository: MoviesRepository
+    @Mock lateinit var moviesRepository: MoviesRepository
 
     private lateinit var useCase: FetchTopRatedMoviesUseCase
 
