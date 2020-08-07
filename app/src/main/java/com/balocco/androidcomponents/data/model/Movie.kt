@@ -27,7 +27,7 @@ data class Movie(
     val releaseDate: String,
     @ColumnInfo(name = "backdrop_path")
     @SerializedName("backdrop_path")
-    val backdropImageName: String,
+    val backdropImageName: String?,
     @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
     val posterImageName: String,

@@ -1,6 +1,7 @@
 package com.balocco.androidcomponents.feature.toprated.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
@@ -24,19 +25,17 @@ import javax.inject.Inject
 
 class TopRatedActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
-    lateinit var navigator: Navigator
-
-    @Inject
-    lateinit var topRatedAdapter: TopRatedAdapter
+    @Inject lateinit var viewModelFactory: ViewModelFactory
+    @Inject lateinit var navigator: Navigator
+    @Inject lateinit var topRatedAdapter: TopRatedAdapter
 
     private lateinit var loading: ProgressBar
     private lateinit var root: ViewGroup
     private lateinit var viewModel: TopRatedViewModel
     private lateinit var manager: LinearLayoutManager
+    private lateinit var scrollListener: TopRatedScrollListener
+
+    private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +49,20 @@ class TopRatedActivity : BaseActivity() {
         actionBar?.title = getString(R.string.title_main)
 
         manager = LinearLayoutManager(this)
+        scrollListener = TopRatedScrollListener(manager)
+        scrollListener.setEndlessScrollListener(
+            object : TopRatedScrollListener.OnEndlessListListener {
+                override fun onLoadMore(totalItemCount: Int) {
+                    Log.e("LoadMore", "Index: " + totalItemCount)
+                    viewModel.onListScrolled(totalItemCount)
+                }
+            })
         val recyclerView = findViewById<RecyclerView>(R.id.recycler)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
             adapter = topRatedAdapter
+            addOnScrollListener(scrollListener)
         }
 
         topRatedAdapter.setMovieListener(object : TopRatedAdapter.OnMovieSelectedListener {
@@ -81,17 +89,30 @@ class TopRatedActivity : BaseActivity() {
             State.SUCCESS -> {
                 topRatedAdapter.update(topRatedState.results)
                 loading.visibility = View.GONE
+                scrollListener.setLoading(false)
             }
             State.ERROR -> {
                 showError(getString(topRatedState.errorMessage))
                 loading.visibility = View.GONE
+                scrollListener.setLoading(false)
             }
-            State.LOADING -> loading.visibility = View.VISIBLE
+            State.LOADING -> {
+                loading.visibility = View.VISIBLE
+                scrollListener.setLoading(true)
+            }
         }
     }
 
     private fun showError(message: String) {
-        Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show()
+        if (snackbar == null) {
+            snackbar = Snackbar.make(root, message, Snackbar.LENGTH_SHORT)
+        }
+
+        snackbar?.apply {
+            if (!isShown) {
+                show()
+            }
+        }
     }
 
     override fun onInject(appComponent: AppComponent) {
