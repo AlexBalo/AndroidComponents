@@ -7,5 +7,6 @@ import com.balocco.androidcomponents.data.model.Movie
 data class DetailState(
     val state: State,
     val movie: Movie? = null,
+    val genres: String,
     @StringRes val errorMessage: Int = 0
 )

@@ -7,6 +7,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.runner.AndroidJUnit4
 import com.balocco.androidcomponents.data.local.AppDatabase
 import com.balocco.androidcomponents.data.local.MoviesDao
+import com.balocco.androidcomponents.data.model.Genre
 import com.balocco.androidcomponents.data.model.Movie
 import org.junit.After
 import org.junit.Before
@@ -72,6 +73,16 @@ class MoviesDaoTest {
         dao.insertMovies(listOf(movieOne, movieTwo)).test()
 
         dao.queryAllMoviesSortedByRating().test().assertValue(listOf(movieTwo, movieOne))
+    }
+
+    @Test
+    fun fetchAGenresWithId_returnsOnlyGenresWithSpecifiedIds() {
+        val genre1 = Genre(1, "Action")
+        val genre2 = Genre(2, "Adventure")
+        val genre3 = Genre(3, "Sci-Fi")
+        dao.insertGenres(listOf(genre1, genre2, genre3)).test()
+
+        dao.queryGenres(listOf(1, 3)).test().assertValue(listOf(genre1, genre3))
     }
 
     private fun givenMovie(

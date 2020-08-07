@@ -42,7 +42,7 @@ data class Movie(
     val popularity: Double
 ) {
     companion object {
-        const val TABLE_NAME = "birthdays"
+        const val TABLE_NAME = "movies"
         const val COLUMN_ID = "uid"
         const val COLUMN_VOTE_AVERAGE = "vote_average"
     }

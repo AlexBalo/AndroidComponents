@@ -11,8 +11,7 @@ import org.mockito.MockitoAnnotations
 
 class LoadMovieUseCaseTest {
 
-    @Mock
-    lateinit var moviesRepository: MoviesRepository
+    @Mock lateinit var moviesRepository: MoviesRepository
 
     private lateinit var useCase: LoadMovieUseCase
 
