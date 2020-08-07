@@ -1,7 +1,6 @@
 package com.balocco.androidcomponents.feature.toprated.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
@@ -21,7 +20,6 @@ import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedState
 import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedViewModel
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
-
 
 class TopRatedActivity : BaseActivity() {
 
@@ -53,7 +51,6 @@ class TopRatedActivity : BaseActivity() {
         scrollListener.setEndlessScrollListener(
             object : TopRatedScrollListener.OnEndlessListListener {
                 override fun onLoadMore(totalItemCount: Int) {
-                    Log.e("LoadMore", "Index: " + totalItemCount)
                     viewModel.onListScrolled(totalItemCount)
                 }
             })
