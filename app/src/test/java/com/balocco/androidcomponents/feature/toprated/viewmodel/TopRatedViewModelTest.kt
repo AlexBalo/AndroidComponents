@@ -11,9 +11,7 @@ import com.balocco.androidcomponents.data.model.Movie
 import com.balocco.androidcomponents.data.model.MoviesPage
 import com.balocco.androidcomponents.feature.toprated.domain.FetchTopRatedMoviesUseCase
 import com.balocco.androidcomponents.feature.toprated.domain.LoadTopRatedMoviesUseCase
-import com.nhaarman.mockito_kotlin.times
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.*
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import org.junit.Assert.assertEquals
@@ -35,6 +33,7 @@ class TopRatedViewModelTest {
     @Captor private lateinit var moviesCaptor: ArgumentCaptor<TopRatedState>
     @Mock private lateinit var navigator: Navigator
     @Mock private lateinit var observer: Observer<TopRatedState>
+    @Mock private lateinit var topRatedPaginator: TopRatedPaginator
     @Mock private lateinit var fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase
     @Mock private lateinit var loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase
 
@@ -44,6 +43,7 @@ class TopRatedViewModelTest {
         viewModel =
             TopRatedViewModel(
                 TestSchedulerProvider(),
+                topRatedPaginator,
                 fetchTopRatedMoviesUseCase,
                 loadTopRatedMoviesUseCase
             )
@@ -101,6 +101,16 @@ class TopRatedViewModelTest {
     }
 
     @Test
+    fun `When movies fetched with error, notifies paginator`() {
+        whenever(fetchTopRatedMoviesUseCase()).thenReturn(Single.error(Throwable()))
+        whenever(loadTopRatedMoviesUseCase()).thenReturn(Flowable.just(emptyList()))
+
+        viewModel.start()
+
+        verify(topRatedPaginator).pageError()
+    }
+
+    @Test
     fun `When movie selected, navigates to detail view`() {
         val movie = TestUtils.createMovie("12")
         viewModel.setNavigator(navigator)
@@ -108,6 +118,28 @@ class TopRatedViewModelTest {
         viewModel.onMovieSelected(movie)
 
         verify(navigator).goToDetail(movie.id)
+    }
+
+    @Test
+    fun `When list scrolled no pagination, does not fetch new page`() {
+        whenever(topRatedPaginator.canPaginate(5)).thenReturn(false)
+
+        viewModel.onListScrolled(5)
+
+        verify(fetchTopRatedMoviesUseCase, never())(any())
+    }
+
+    @Test
+    fun `When list scrolled pagination possible, fetches next page`() {
+        val movies = mutableListOf(TestUtils.createMovie("11"), TestUtils.createMovie("12"))
+        val moviesPage = createMoviePage(movies)
+        whenever(fetchTopRatedMoviesUseCase(6)).thenReturn(Single.just(moviesPage))
+        whenever(topRatedPaginator.canPaginate(5)).thenReturn(true)
+        whenever(topRatedPaginator.nextPage()).thenReturn(6)
+
+        viewModel.onListScrolled(5)
+
+        verify(fetchTopRatedMoviesUseCase)(6)
     }
 
     private fun createMoviePage(movies: List<Movie>): MoviesPage =

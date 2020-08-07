@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 class TopRatedViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider,
+    private val topRatedPaginator: TopRatedPaginator,
     private val fetchTopRatedMoviesUseCase: FetchTopRatedMoviesUseCase,
     private val loadTopRatedMoviesUseCase: LoadTopRatedMoviesUseCase
 ) : BaseViewModel() {
@@ -39,15 +40,26 @@ class TopRatedViewModel @Inject constructor(
         navigator?.goToDetail(movie.id)
     }
 
-    private fun fetchTopRatedMovies() {
-        fetchTopRatedMoviesUseCase()
+    fun onListScrolled(index: Int) {
+        if (topRatedPaginator.canPaginate(index)) {
+            fetchTopRatedMovies(topRatedPaginator.nextPage())
+        }
+    }
+
+    private fun fetchTopRatedMovies(page: Int = 1) {
+        fetchTopRatedMoviesUseCase(page)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
             .doOnSubscribe { handleLoading() }
             .subscribe(
                 { result -> handlePagination(result) },
-                { handleError() }
+                { handlePaginationError() }
             ).addTo(compositeDisposable)
+    }
+
+    private fun handlePaginationError() {
+        topRatedPaginator.pageError()
+        handleError()
     }
 
     private fun handleLoading() {
@@ -64,6 +76,6 @@ class TopRatedViewModel @Inject constructor(
     }
 
     private fun handlePagination(result: MoviesPage) {
-        // Handle pagination events
+        topRatedPaginator.updatePages(MoviesPageInfo(result.page, result.totalPages))
     }
 }

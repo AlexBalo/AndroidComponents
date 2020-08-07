@@ -1,17 +1,18 @@
 package com.balocco.androidcomponents.feature.toprated.di
 
-import androidx.lifecycle.ViewModel
-import com.balocco.androidcomponents.di.ViewModelKey
-import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedViewModel
-import dagger.Binds
+import com.balocco.androidcomponents.di.ActivityScope
+import com.balocco.androidcomponents.feature.toprated.viewmodel.TopRatedPaginator
 import dagger.Module
-import dagger.multibindings.IntoMap
+import dagger.Provides
 
-@Module()
-abstract class TopRatedSubcomponentsModule {
+private const val RESULTS_PER_PAGE = 20
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(TopRatedViewModel::class)
-    abstract fun bindMainViewModel(topRatedViewModel: TopRatedViewModel): ViewModel
+@Module
+class TopRatedSubcomponentsModule {
+
+    @Provides
+    @ActivityScope
+    fun provideTopRatedPaginator(
+    ): TopRatedPaginator = TopRatedPaginator(RESULTS_PER_PAGE)
+
 }

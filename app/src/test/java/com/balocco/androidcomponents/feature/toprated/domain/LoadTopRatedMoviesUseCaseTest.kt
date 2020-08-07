@@ -11,8 +11,7 @@ import org.mockito.MockitoAnnotations
 
 class LoadTopRatedMoviesUseCaseTest {
 
-    @Mock
-    lateinit var moviesRepository: MoviesRepository
+    @Mock lateinit var moviesRepository: MoviesRepository
 
     private lateinit var useCase: LoadTopRatedMoviesUseCase
 
@@ -20,10 +19,7 @@ class LoadTopRatedMoviesUseCaseTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        useCase =
-            LoadTopRatedMoviesUseCase(
-                moviesRepository
-            )
+        useCase = LoadTopRatedMoviesUseCase(moviesRepository)
     }
 
     @Test

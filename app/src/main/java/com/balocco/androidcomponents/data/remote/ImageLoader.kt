@@ -8,9 +8,11 @@ class ImageLoader @Inject constructor(
     private val picasso: Picasso
 ) {
 
-    fun loadImage(target: ImageView, imageName: String) {
-        val imageUrl = buildImageUrl(imageName)
-        picasso.load(imageUrl).into(target)
+    fun loadImage(target: ImageView, imageName: String?) {
+        imageName?.let {
+            val imageUrl = buildImageUrl(imageName)
+            picasso.load(imageUrl).into(target)
+        }
     }
 
     private fun buildImageUrl(imageName: String) =

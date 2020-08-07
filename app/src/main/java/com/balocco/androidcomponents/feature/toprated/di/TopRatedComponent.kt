@@ -9,7 +9,8 @@ import dagger.Subcomponent
 @ActivityScope
 @Subcomponent(
     modules = [
-        TopRatedSubcomponentsModule::class
+        TopRatedSubcomponentsModule::class,
+        TopRatedViewModelModule::class
     ]
 )
 interface TopRatedComponent {
