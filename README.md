@@ -7,4 +7,4 @@ Each activity is controlled by a VieModel that handles the data retrieval and no
 
 The two screen are:
 1. A listing screen showing the top rated movies sorted by their user rating. The ViewModel in this case also handles pagination of the results;
-2. A detail screen that is shown when a used clicks on a list entry.
+2. A detail screen that is shown when a user clicks on a list entry.
