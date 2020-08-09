@@ -7,7 +7,7 @@ class TopRatedPaginator @Inject constructor(
 ) {
 
     private var currentPage = 0
-    private var totalPages = 0;
+    private var totalPages = Integer.MAX_VALUE
 
     fun canPaginate(index: Int): Boolean {
         val nextPageToLoad = (index / pageSize) + 1

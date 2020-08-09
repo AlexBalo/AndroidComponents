@@ -51,37 +51,35 @@ class TopRatedViewModelTest {
     }
 
     @Test
-    fun `When started and fetching movies, updates observers with loading state`() {
-        val movies = emptyList<Movie>()
+    fun `When started no movies locally, updates observers with loading state`() {
+        val movies = listOf(TestUtils.createMovie("1"), TestUtils.createMovie("2"))
         val moviesPage = createMoviePage(movies)
+        whenever(loadTopRatedMoviesUseCase()).thenReturn(Flowable.just(emptyList()))
         whenever(fetchTopRatedMoviesUseCase()).thenReturn(Single.just(moviesPage))
-        whenever(loadTopRatedMoviesUseCase()).thenReturn(Flowable.just(movies))
 
         viewModel.start()
 
-        // We get invokation for the success state as well so we check only second result
-        verify(observer, times(2)).onChanged(moviesCaptor.capture())
-        val loadingState = moviesCaptor.allValues[1]
+        verify(observer).onChanged(moviesCaptor.capture())
+        val loadingState = moviesCaptor.value
         assertEquals(State.LOADING, loadingState.state)
         assertTrue(loadingState.results.isEmpty())
         assertEquals(0, loadingState.errorMessage)
+        verify(fetchTopRatedMoviesUseCase)(1)
     }
 
     @Test
     fun `When started and movies already available, updates observers with success state`() {
         val movies = mutableListOf(TestUtils.createMovie("11"), TestUtils.createMovie("12"))
-        val moviesPage = createMoviePage(movies)
-        whenever(fetchTopRatedMoviesUseCase()).thenReturn(Single.just(moviesPage))
         whenever(loadTopRatedMoviesUseCase()).thenReturn(Flowable.just(movies))
 
         viewModel.start()
 
-        // We get invokation for the loading state as well but we check first result
-        verify(observer, times(2)).onChanged(moviesCaptor.capture())
-        val successState = moviesCaptor.allValues[0]
+        verify(observer, times(1)).onChanged(moviesCaptor.capture())
+        val successState = moviesCaptor.value
         assertEquals(State.SUCCESS, successState.state)
         assertEquals(movies, successState.results)
         assertEquals(0, successState.errorMessage)
+        verify(fetchTopRatedMoviesUseCase, never())(1)
     }
 
     @Test
@@ -91,10 +89,9 @@ class TopRatedViewModelTest {
 
         viewModel.start()
 
-        // We get invokation for the loading state and the data from local storage
-        // but we pick only the error which is the last one
-        verify(observer, times(3)).onChanged(moviesCaptor.capture())
-        val loadingState = moviesCaptor.allValues[2]
+        // We get invokation for the loading state and error when fetching data
+        verify(observer, times(2)).onChanged(moviesCaptor.capture())
+        val loadingState = moviesCaptor.allValues[1]
         assertEquals(State.ERROR, loadingState.state)
         assertTrue(loadingState.results.isEmpty())
         assertEquals(R.string.error_loading_movies, loadingState.errorMessage)
