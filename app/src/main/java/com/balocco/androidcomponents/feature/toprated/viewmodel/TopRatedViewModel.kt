@@ -33,7 +33,6 @@ class TopRatedViewModel @Inject constructor(
                 { result -> handleSuccess(result) },
                 { handleError() }
             ).addTo(compositeDisposable)
-        fetchTopRatedMovies()
     }
 
     fun onMovieSelected(movie: Movie) {
@@ -67,6 +66,12 @@ class TopRatedViewModel @Inject constructor(
     }
 
     private fun handleSuccess(movies: List<Movie>) {
+        if (movies.isEmpty()) {
+            fetchTopRatedMovies(1)
+            return
+        }
+
+        this.movies.clear()
         this.movies.addAll(movies)
         topRatedState.value = TopRatedState(State.SUCCESS, movies)
     }
