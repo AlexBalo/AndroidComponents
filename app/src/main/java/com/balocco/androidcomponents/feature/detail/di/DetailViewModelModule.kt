@@ -13,5 +13,5 @@ abstract class DetailViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(DetailViewModel::class)
-    abstract fun bindMainViewModel(topRatedViewModel: DetailViewModel): ViewModel
+    abstract fun bindDetailViewModel(topRatedViewModel: DetailViewModel): ViewModel
 }

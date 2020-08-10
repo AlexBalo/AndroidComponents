@@ -13,5 +13,5 @@ abstract class TopRatedViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(TopRatedViewModel::class)
-    abstract fun bindMainViewModel(topRatedViewModel: TopRatedViewModel): ViewModel
+    abstract fun bindTopRatedViewModel(topRatedViewModel: TopRatedViewModel): ViewModel
 }

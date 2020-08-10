@@ -14,6 +14,7 @@ import dagger.Component
         DataModule::class,
         NetworkModule::class,
         SchedulersModule::class,
+        ViewModelFactoryModule::class,
         AppSubcomponentsModule::class]
 )
 interface AppComponent {
